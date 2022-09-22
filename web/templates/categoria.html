@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Categoria</title>
+        <script>
+            function goBack() {
+              window.history.back();
+            }
+        </script>
+    </head>
+    <body style= "padding:20px">
+    
+        <h1>Menu Categorias</h1>
+       
+        <div id="tabela">
+            <button onclick="window.location.href='menu'">Menu principal</button>
+            <button onclick="window.location.href='categoria/inserir'">Inserir Categoria</button>
+        {% if cursor %}
+        <table id="menu">
+            <thead>
+            <tr>
+            <th> Categoria </th>
+            </tr>
+        </thead>
+        {% for record in cursor %}
+        <tr>
+            <td> {{ record[0] }} </td>
+            <td><a href= "categoria/remover?nome={{ record[0]}}"> Remover </a></td >
+            <td><a href= "categoria/inserir_subcategoria?nome={{ record[0]}}"> Inserir Sub-categoria </a></td >
+            <td><a href= "categoria/listar_subcategorias?nome={{ record[0]}}"> Listar Sub-categorias </a></td >
+        </tr>
+        {% endfor %} 
+        </table>
+        </div>
+        {% else %}
+        <p> Erro: não foi possível obter dados da base de dados! </p>
+        {% endif %}
+    </body>
+</html>
